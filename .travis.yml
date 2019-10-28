@@ -7,11 +7,17 @@ matrix:
       python: 2.7
       services:
         - docker
+      before_install:
+        - sudo apt-get update
+        - sudo apt-get install -y git gcc-4.8 g++-4.8 autoconf cmake libtool wget unzip libbz2-dev zlib1g-dev
+        - sudo apt-get install -y python-dev
+
       install:
         - mkdir rocketmqlib && wget -P rocketmqlib https://opensource-rocketmq-client-us.oss-us-west-1.aliyuncs.com/cpp-client/linux/1.2.4/RHEL7.x/librocketmq.tar.gz
         - tar -xzf ./rocketmqlib/librocketmq.tar.gz -C rocketmqlib
         - sudo cp ./rocketmqlib/librocketmq.so ./rocketmq
         - rm -rf rocketmqlib
+
       script:
         - docker pull quay.io/pypa/manylinux1_x86_64:latest
         - docker run --rm -it -v `pwd`:/io -w /io quay.io/pypa/manylinux1_x86_64:latest /io/manylinux.sh
@@ -23,11 +29,18 @@ matrix:
         - pip install codecov && codecov
         # Try to install binary wheel
         - pip install --force-reinstall dist/*.whl
+
     - dist: trusty
       language: python
       python: 3.6
       services:
         - docker
+
+      before_install:
+        - sudo apt-get update
+        - sudo apt-get install -y git gcc-4.8 g++-4.8 autoconf cmake libtool wget unzip libbz2-dev zlib1g-dev
+        - sudo apt-get install -y python-dev
+
       install:
         - mkdir rocketmqlib && wget -P rocketmqlib https://opensource-rocketmq-client-us.oss-us-west-1.aliyuncs.com/cpp-client/linux/1.2.4/RHEL7.x/librocketmq.tar.gz
         - tar -xzf ./rocketmqlib/librocketmq.tar.gz -C rocketmqlib

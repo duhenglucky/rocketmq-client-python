@@ -7,9 +7,15 @@ matrix:
       python: 2.7
       services:
         - docker
+      install:
+        - mkdir rocketmqlib && wget -P rocketmqlib https://opensource-rocketmq-client-us.oss-us-west-1.aliyuncs.com/cpp-client/linux/1.2.4/RHEL7.x/librocketmq.tar.gz ./rocketmqlib
+        - sudo cp librocketmq.so librocketmq.a /usr/local/lib/
+        - tar -xzf ./rocketmqlib/librocketmq.tar.gz -C rocketmqlib
+        - sudo cp ./rocketmqlib/librocketmq.so ./rocketmq
+        - rm -rf rocketmqlib
       script:
-        - docker pull messense/rocketmq-client-python-ci:latest
-        - docker run --rm -it -v `pwd`:/io -w /io messense/rocketmq-client-python-ci:latest /io/manylinux.sh
+        - docker pull quay.io/pypa/manylinux1_x86_64:latest
+        - docker run --rm -it -v `pwd`:/io -w /io quay.io/pypa/manylinux1_x86_64:latest /io/manylinux.sh
         - ls dist/
         - sudo rm -rf build *.egg-info
         - pip install -Ur dev-requirements.txt
@@ -23,9 +29,15 @@ matrix:
       python: 3.6
       services:
         - docker
+      install:
+        - mkdir rocketmqlib && wget -P rocketmqlib https://opensource-rocketmq-client-us.oss-us-west-1.aliyuncs.com/cpp-client/linux/1.2.4/RHEL7.x/librocketmq.tar.gz ./rocketmqlib
+        - sudo cp librocketmq.so librocketmq.a /usr/local/lib/
+        - tar -xzf ./rocketmqlib/librocketmq.tar.gz -C rocketmqlib
+        - sudo cp ./rocketmqlib/librocketmq.so ./rocketmq
+        - rm -rf rocketmqlib
       script:
-        - docker pull messense/rocketmq-client-python-ci:latest
-        - docker run --rm -it -v `pwd`:/io -w /io messense/rocketmq-client-python-ci:latest /io/manylinux.sh
+        - docker pull quay.io/pypa/manylinux1_x86_64:latest
+        - docker run --rm -it -v `pwd`:/io -w /io quay.io/pypa/manylinux1_x86_64:latest /io/manylinux.sh
         - ls dist/
         - sudo rm -rf build *.egg-info
         - pip install -Ur dev-requirements.txt

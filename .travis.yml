@@ -9,7 +9,6 @@ matrix:
         - docker
       install:
         - mkdir rocketmqlib && wget -P rocketmqlib https://opensource-rocketmq-client-us.oss-us-west-1.aliyuncs.com/cpp-client/linux/1.2.4/RHEL7.x/librocketmq.tar.gz
-        - sudo cp librocketmq.so librocketmq.a /usr/local/lib/
         - tar -xzf ./rocketmqlib/librocketmq.tar.gz -C rocketmqlib
         - sudo cp ./rocketmqlib/librocketmq.so ./rocketmq
         - rm -rf rocketmqlib
@@ -31,7 +30,6 @@ matrix:
         - docker
       install:
         - mkdir rocketmqlib && wget -P rocketmqlib https://opensource-rocketmq-client-us.oss-us-west-1.aliyuncs.com/cpp-client/linux/1.2.4/RHEL7.x/librocketmq.tar.gz
-        - sudo cp librocketmq.so librocketmq.a /usr/local/lib/
         - tar -xzf ./rocketmqlib/librocketmq.tar.gz -C rocketmqlib
         - sudo cp ./rocketmqlib/librocketmq.so ./rocketmq
         - rm -rf rocketmqlib
